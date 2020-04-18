@@ -76,6 +76,7 @@ class IndexController extends HomeBaseController{
 
         $map = array();
         $map['status'] = 1;
+        $map['end_time'] = array('gt',time());
         $task_list = M('task')->field('id,cid,title,level,price,create_time,max_num,apply_num,max_num-apply_num as leftnum, tasklb')->where($map)->order('id desc')->limit(10)->select();
         $level_list = LevelModel::get_member_level();
         foreach ($task_list as &$item) {

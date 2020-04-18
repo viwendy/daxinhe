@@ -64,9 +64,11 @@
              <p>发布</p>
         </li>
 		<li <if condition="CONTROLLER_NAME eq 'Member' and ACTION_NAME eq 'notice'"> class="active"</if> >
-           <a href="{:U('Member/notice')}">
+           <a href="{:U('Task/submission_task_list')}">
                 <span><i class="icon_xiaoxi" style="width: 25px;height: 25px;"></i></span>
-             <p>消息 </p>
+             <!--<p>消息 </p>-->
+               <!--<span class="divright {$_SESSION['weidu_xiaoxi'] ? 'show':'hide'}">{$_SESSION['weidu_xiaoxi']}</span>-->
+               <p>任务 </p>
                <span class="divright {$_SESSION['weidu_xiaoxi'] ? 'show':'hide'}">{$_SESSION['weidu_xiaoxi']}</span>
             </a>
         </li>

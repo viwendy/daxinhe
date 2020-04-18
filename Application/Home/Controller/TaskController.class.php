@@ -234,6 +234,47 @@ class TaskController extends HomeBaseController{
     }
 
     /**
+     * 所有任务
+     */
+    public function submission_task_list()
+    {
+        if( !$this->is_login() ) {
+            $this->error("请先登录");
+        }
+        $member_id = $this->get_member_id();
+
+        $map = array();
+        $map['a.member_id'] = $member_id;
+        //$map['a.status'] = array('eq',0);
+        $model = M('task_apply');
+        $count = $model->alias('a')->where($map)->count();
+        $page = sp_get_page_m($count, 10);//分页
+        $firstRow = $page->firstRow;
+        $listRows = $page->listRows;
+
+        $map['title'] = ['neq', 'null'];
+
+        $list = $model->alias('a')
+            ->join(C('DB_PREFIX').'task as b on a.task_id = b.id','left')
+            ->where($map)
+            ->field('a.*,b.title')
+            ->order('a.id desc')->limit("$firstRow , $listRows")
+            ->select();
+
+        foreach ($list as &$item) {
+            $item['cha_time'] = $item['end_time'] - time();
+        }
+        // var_dump($list);die;
+
+        $this->assign("Page", $page->show());
+        $this->assign("list", $list);
+        $this->assign('count', $count);
+
+        $this->assign('title','选择提交的任务');
+        $this->display();
+    }
+
+    /**
      * 待提交的任务
      */
     public function submission_task()

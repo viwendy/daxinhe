@@ -1894,6 +1894,10 @@ footer .info a{
 .task_box .con ul li a span.zhuangtai{ width:30%; float: right; width:60px; height:24px; line-height:24px; text-align:center; background:#5a6afa; border-radius:10px; color:#fff;}
 .task_box .con ul li span.price{color: red;float: right;padding-right: 20px;}
 .task_box .con ul li span.lq{display:block;background: #6261f9; width:90%; margin:0 auto;border-radius: 3px;color: #fff;line-height: 14px; height:36px; line-height:36px; text-align:center;}
+.task_box .con ul li span.lq11{display:block;background: #61d6f9; width:90%; margin:0 auto;border-radius: 3px;color: #fff;line-height: 14px; height:36px; line-height:36px; text-align:center;}
+.task_box .con ul li span.lq12{display:block;background: #61f966; width:90%; margin:0 auto;border-radius: 3px;color: #fff;line-height: 14px; height:36px; line-height:36px; text-align:center;}
+.task_box .con ul li span.lq13{display:block;background: #f97d61; width:90%; margin:0 auto;border-radius: 3px;color: #fff;line-height: 14px; height:36px; line-height:36px; text-align:center;}
+.task_box .con ul li span.lq14{display:block;background: #bf61f9; width:90%; margin:0 auto;border-radius: 3px;color: #fff;line-height: 14px; height:36px; line-height:36px; text-align:center;}
 
 .task_main{padding: 10px;}
 .task_main .tip_box{box-shadow: 0 0 12px #ddd;margin-bottom: 20px;}

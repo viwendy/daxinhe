@@ -57,10 +57,10 @@ return array(
 //***********************************邮件服务器**********************************
 
     'EMAIL_STATUS'           => 1,             // 是否开启邮件发送,如果关闭则注册 找回密码等页面 不开启邮件验证,邮件和手机验证至少有一个可用 //TODO 20191027
-    'EMAIL_FROM_NAME'        => '找主题',          // 发件人
-    'EMAIL_SMTP'             => 'smtp.exmail.qq.com',   //smtp.126.com',   // smtp
-    'EMAIL_USERNAME'         => 'admin@exmail.zzhuti.com', // 账号
-    'EMAIL_PASSWORD'         => '******',         // 密码  注意: 163和QQ邮箱是授权码；不是登录的密码
+    'EMAIL_FROM_NAME'        => '抖赚',          // 发件人
+    'EMAIL_SMTP'             => 'smtp.qq.com',   //smtp.126.com',   // smtp
+    'EMAIL_USERNAME'         => '3013342667@qq.com', // 账号
+    'EMAIL_PASSWORD'         => 'mgoaghqnhqujdgag',         // 密码  注意: 163和QQ邮箱是授权码；不是登录的密码
     'EMAIL_SMTP_SECURE'      => 'ssl',            // 链接方式 如果使用QQ邮箱；需要把此项改为  ssl
     'EMAIL_PORT'             => '465',             // 端口 如果使用QQ邮箱；需要把此项改为  465
 //***********************************短信相关配置**********************************

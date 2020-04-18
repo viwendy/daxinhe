@@ -117,8 +117,8 @@
     <div class="show_index_sss" style="height: 60px;line-height:60px;border-bottom: 1px solid #ccc;">
         <img src="{$sys_config.web_logo}" width="60" style="float: left;margin-left: 3%;"/>
         <span style="display: inline-block;color: #39c773;font-size: 15px;margin-top: -20px;font-weight: initial">{$show.username}</span>
-        <button type="button" class="show_djfzz"   >关注</button>
-        <button type="button" class="show_djfzz" >店铺</button>
+        <!--<button type="button" class="show_djfzz"   >关注</button>-->
+        <!--<button type="button" class="show_djfzz" >店铺</button>-->
     </div>
 
 
@@ -142,19 +142,34 @@
  		</p>
         <div style="clear: both;padding-top:5px"></div>
             <div class="task_need" style="padding-left:3%">
-                <label class="{$show['is_shouji']?'select':''}">手机认证</label>
-                <label class="{$show['is_weixin']?'select':''}">微信认证</label>
-                <label class="{$show['is_shiming']?'select':''}">实名认证</label>
-                <label class="{$show['is_idcard']?'select':''}">身份证认</label>
+                <!--<label class="{$show['is_shouji']?'select':''}">手机认证</label>-->
+                <!--<label class="{$show['is_weixin']?'select':''}">微信认证</label>-->
+                <!--<label class="{$show['is_shiming']?'select':''}">实名认证</label>-->
+                <!--<label class="{$show['is_idcard']?'select':''}">身份证认</label>-->
+                <?php
+                     if ($show['is_shouji']){
+                        echo '<label class="select">手机认证</label>';
+                     }
+                     if ($show['is_weixin']){
+                        echo '<label class="select">微信认证</label>';
+                     }
+                     if ($show['is_shiming']){
+                        echo '<label class="select">实名认证</label>';
+                     }
+                     if ($show['is_idcard']){
+                        echo '<label class="select">身份证认</label>';
+                     }
+                ?>
             </div>
 
  		<div class="copy_btn">
           <div class="t3" style="display:n;color:#fff;height: 20px;background: ;overflow: hidden;">{$show.taskuser}<input id="foo" type="text" value="{$show.taskuser}" style="height: 1px;width: 1px;position: absolute;top: 0;left: 0;"></div>
- 		<p class="show_zpllj" style="overflow: hidden;" id="text">{$show.taskuser} <input id="foo" type="text" value="{$show.taskuser}" style="height: 1px;width: 1px;position: absolute;top: 0;left: 0;"></div> </p>
+            <p class="show_zpllj" id="text" style="display: none;">{$show.taskuser} <input id="foo" type="text" value="{$show.taskuser}" style="height: 1px;width: 1px;position: absolute;top: 0;left: 0;display: none;"></p>
+            <button type="button" class="show_djfzz copy" onclick='window.location.href="{$show.taskuser}"' style="background:#fff;width:30%">打开视频</button>
       <button type="button" class="show_djfzz copy" data-clipboard-action="copy" data-clipboard-target="#foo" style="background:#fff;width:30%">点击复制</button>
            <if condition="$member_client_info['platform'] eq 'app'">
            </if>
-          </div>
+        </div>
  	</div>
     <div style="clear: both;"></div>
 

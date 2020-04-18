@@ -519,8 +519,8 @@ class PublicController extends PublicBaseController
             //share_info
             $nickname = M('member')->where(array('id' => $member_id))->getField('nickname');
             $share_link = U('Public/reg', array("smid" => $member_id), '', true);
-            $share_title = '帮帮-遇见最好的自己';
-            $share_desc = "让科技实现价值 让共享创造财富。我是帮帮推广合伙人{$nickname} 加入我们开启财富之旅";
+            $share_title = '抖赚-遇见最好的自己';
+            $share_desc = "让科技实现价值 让共享创造财富。我是抖赚推广合伙人{$nickname} 加入我们开启财富之旅";
             $share_logo = "http://" . $_SERVER['HTTP_HOST'] . "/Upload/qrcode/share_{$member_id}.png";
             $this->assign('share_link', $share_link);
             $this->assign('share_title', $share_title);

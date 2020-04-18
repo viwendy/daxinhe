@@ -728,7 +728,7 @@ class MemberController extends HomeBaseController{
             $member = $this->get_member_data();
             $member['level_name'] = $this->get_level_name($member['level']);
             $member_level = LevelModel::get_member_level();
-            unset($member_level[3]);//不分钻石会员
+            unset($member_level[0]);//不分钻石会员
             $this->assign('member_level',$member_level);
             $this->assign('member',$member);
 

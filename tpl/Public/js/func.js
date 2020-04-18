@@ -89,7 +89,7 @@ $(function(){
                 }
             },
             error:function(data){
-                alert(data);
+                // alert(data.info);
             }
         });
         return false;

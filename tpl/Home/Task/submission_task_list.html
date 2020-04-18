@@ -37,7 +37,11 @@
                             <a href="{:U('Member/apply_show',array('id'=>$vo['id']))}" class="link">
                         </if>
                         <if condition="$vo['status'] eq 0">
-                            <a href="{:U('submission_task_do',array('id'=>$vo['id']))}" class="link">
+                            <if condition="$vo['end_time'] gt time()">
+                                <a href="{:U('submission_task_do',array('id'=>$vo['id']))}" class="link">
+                                <else/>
+                                    <a href="{:U('Member/apply_show',array('id'=>$vo['id']))}" class="link">
+                            </if>
                         </if>
                         <if condition="$vo['status'] eq 1">
                             <a href="{:U('Member/apply_show',array('id'=>$vo['id']))}" class="link">
@@ -66,8 +70,12 @@
 
                         </a>
                         <if condition="$vo['status'] eq 0">
-
-                            <span class="lq chakan" data-id="{$vo.id}">放弃任务</span>
+                            <if condition="$vo['end_time'] gt time()">
+                            <span class="lq" onclick='window.location.href="{$vo['taskuser']}"' style="width:40%;float:left;">打开视频</span>
+                            <span class="lq" onclick='window.location.href="{:U('submission_task_do',array('id'=>$vo['id']))}"' style="width:40%; float:right;">提交任务</span>
+                            <else/>
+                                <span class="lq11">任务超时</span>
+                            </if>
 
                         </if>
 
@@ -78,7 +86,7 @@
                         </if>
                         <if condition="$vo['status'] eq -2">
 
-                            <span class="lq12">任务超时</span>
+                            <span class="lq12">放弃任务</span>
 
                         </if>
 

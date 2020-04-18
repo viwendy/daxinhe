@@ -31,7 +31,11 @@
                 <div class="item">
                     <p class="c">
                         <if condition="$apply_data['status'] eq 0">
-                            未提交任务，<a href="{:U('Task/submission_task_do',array('id'=>$apply_data['id']))}" style="color: #6b3535;text-decoration: underline;">去提交</a>
+                            <if condition="$apply_data['end_time'] gt time()">
+                                未提交任务，<a href="{:U('Task/submission_task_do',array('id'=>$apply_data['id']))}" style="color: #6b3535;text-decoration: underline;">去提交</a>
+                                    <else/>
+                                    任务超时
+                            </if>
                         <else/>
                             <img id="image" src="{$apply_data.file|sp_img}" alt="" style="max-width: 100%" >
                         </if>

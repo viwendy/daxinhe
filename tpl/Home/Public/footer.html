@@ -1,0 +1,87 @@
+<style type="text/css">
+	.footer li{
+		width: 20%;
+        padding:5px 0;
+     
+	}
+
+    .fabu{
+        /*font-size: 20px;display: block;border-radius: 50%;margin: 0 auto;*/
+        /*width:50px;height: 50px;border: 1px solid red;*/
+        /*margin-top: -30px;*/
+        /*z-index: 999;;position:absolute;*/
+
+        border: 1px solid gainsboro;
+        border-radius: 50%;
+        background: #fff;
+        width: 50px;
+        line-height: 50px;
+        margin:0 auto;
+        height: 50px;
+        font-size: 2.5rem;
+        margin-top: -25px;
+    }
+    .user_index_shza{
+        margin-bottom:150px;
+    }
+    .divright{
+        position: relative;
+        right: 10px;;
+        top: -35px;;
+        background:#c72c4f;
+        width: 15px;
+        height: 15px!important;
+        float: right;
+        border-radius: 50%;
+        color: #fff;
+    }
+    .body_main{
+        margin-bottom: 76px;;}
+    .footer li span.hide{display: none}
+
+</style>
+<footer class="footer">
+    <ul>
+        <li <if condition="CONTROLLER_NAME eq 'Index'"> class="active"</if> >
+            <a href="{:U('Index/index')}">
+                <span><i class="icon_home" style="width: 25px;height: 25px;"></i></span>
+                <p>首页</p>
+            </a>
+        </li>
+        <li <if condition="CONTROLLER_NAME eq 'Task'"> class="active"</if> >
+            <a href="{:U('Task/index')}">
+                <span><i class="icon_task" style="width: 25px;height: 25px;"></i></span>
+              <p>VIP</p>
+            </a>
+        </li>
+        <li <if condition="CONTROLLER_NAME eq 'Task2'"> class="active"</if> >
+        <div class="fabu">
+           
+          <a href="{:U('Task/handle')}" ><img style="  border-radius: 50%;width:50px;height: 50px;line-height: 100%;" src="__PUBLIC_IMAGES__/1234.png" >
+              </a> <span><i class="" style="width: 25px;height: 25px;"></i></span>
+        </div>
+
+             <p>发布</p>
+        </li>
+		<li <if condition="CONTROLLER_NAME eq 'Member' and ACTION_NAME eq 'notice'"> class="active"</if> >
+           <a href="{:U('Member/notice')}">
+                <span><i class="icon_xiaoxi" style="width: 25px;height: 25px;"></i></span>
+             <p>消息 </p>
+               <span class="divright {$_SESSION['weidu_xiaoxi'] ? 'show':'hide'}">{$_SESSION['weidu_xiaoxi']}</span>
+            </a>
+        </li>
+        <li <if condition="CONTROLLER_NAME eq 'Member' and ACTION_NAME eq 'index' "> class="active"</if> >
+            <a href="{:U('Member/index')}">
+                <span><i class="icon_user" style="width: 25px;height: 25px;"></i></span>
+                <p>我的</p>
+            </a>
+        </li>
+    </ul>
+</footer>
+
+<script>
+    $(function () {
+        $('.footer').prev('div').css('margin-bottom','150px')
+    })
+
+</script>

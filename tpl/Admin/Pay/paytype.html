@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{~echo sp_cfg('website')}</title>
+    <bootstrapcss />
+</head>
+<body>
+<div class="bjy-admin-nav">
+    <i class="fa fa-home"></i> 首页
+    &gt;
+    后台管理
+    &gt;
+    视频列表
+</div>
+<ul id="myTab" class="nav nav-tabs">
+   <li class="active">
+         <a href="{:U('paytype', $get)}">支付方式列表</a>
+   </li>
+   <li>
+        <a href="{:U('handle')}">添加支付方式</a>
+    </li>
+</ul>
+<form class="form-search form-inline" method="get" action="" style="padding: 10px 0; ">
+    关键词：
+    <div class="input-group">
+        <input type="text" name="keyword" value="{$get.keyword}" class="input-sm search-query date-picker" placeholder="搜索关键词">
+    </div>
+
+    <div class="input-group">
+        <button type="submit" class="btn btn-info btn-sm">
+            <span class="ace-icon fa fa-search icon-on-right bigger-110"></span>
+            搜索
+        </button>
+    </div>
+</form>
+
+<form action="{:U('Admin/Pay/order')}" method="post">
+<table class="table table-striped table-bordered table-hover table-condensed">
+    <tr>
+        <th width="5%">排序</th>
+        <th>标识</th>
+        <th>名称</th>
+        <th>副名称</th>
+        <th>线上支付</th>
+        <th>状态</th>
+        <th width="220" style="text-align: center">操作</th>
+    </tr>
+    <foreach name="list" item="v">
+        <tr>
+            <td>
+                <input class="form-control" style="width:40px;height:25px;" type="text" name="{$v['id']}" value="{$v['order_number']}">
+            </td>
+            <td>{$v['paytype']}</td>
+            <td>{$v['pay_name']}</td>
+            <th>{$v['pay_name2']}</th>
+            <th>{$v['is_online']?'<font class="label label-success radius" color="#5eb95e">是</font>':'<font class="label label-default radius" color="#999">否</font>'}</th>
+            <th>{$v['status']?'<font class="label label-success radius" color="#5eb95e">启用</font>':'<font class="label label-default radius" color="#999">禁用</font>'}</th>
+            <td>
+                <a href="{:U('handle',array('id'=>$v['id']))}" class="btn btn-default btn-xs">编辑</a>
+                &nbsp;
+                <a href="{:U('delete',array('id'=>$v['id']))}" class="btn btn-default btn-xs delete">删除</a>
+            </td>
+        </tr>
+    </foreach>
+    <tr>
+        <th>
+            <input class="btn btn-success" type="submit" value="排序">
+        </th>
+        <td colspan="6"></td>
+    </tr>
+</table>
+</form>
+{$Page}
+
+<bootstrapjs />
+</body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>{~echo sp_cfg('website')}</title>
+    <bootstrapcss />
+    <icheckcss />
+
+    <?php
+    if($info['id'] > 0) {
+        $handle_type = "编辑";
+    } else {
+        $handle_type = "添加";
+    }
+    ?>
+</head>
+<body>
+
+<!-- 导航栏开始 -->
+<div class="bjy-admin-nav">
+    <i class="fa fa-home"></i> 首页
+    &gt;
+    支付方式管理
+    &gt;
+    {$handle_type}支付方式
+</div>
+<!-- 导航栏结束 -->
+<ul id="myTab" class="nav nav-tabs">
+   <li>
+         <a href="{:U('paytype')}">支付方式列表</a>
+   </li>
+   <li class="active">
+        <a href="javascript:">{$handle_type}内容</a>
+    </li>
+</ul>
+<form class="form-inline" method="post" onsubmit="return check()">
+    <input type="hidden" name="id" value="{$info.id}">
+    <table class="table table-striped table-bordered table-hover table-condensed">
+        <tr id="is_online_tr">
+            <th>是否线上支付</th>
+            <td>
+                <input class="form-control"  type="radio" name="is_online" value="1" <?php echo $info['is_online']?'checked':''?>>是　　
+                <input class="form-control"  type="radio" name="is_online" value="0" <?php echo !$info['is_online']?'checked':''?>>否
+            </td>
+        </tr>
+        <tr>
+            <th>前台图标</th>
+            <td>
+                <label for="ico1">
+                    <input class="form-control" id="ico1"  type="radio" name="ico" value="__PUBLIC_IMAGES__/span-wx.png" <?php echo $info['ico']=='/tpl/Public/images/span-wx.png'?'checked':''?>>
+                    <img src="__PUBLIC_IMAGES__/span-wx.png" alt="">　　
+                </label>
+
+                <label for="ico2">
+                    <input class="form-control" id="ico2"  type="radio" name="ico" value="__PUBLIC_IMAGES__/span-zfb.png" <?php echo $info['ico']=='/tpl/Public/images/span-zfb.png'?'checked':''?>>
+                    <img src="__PUBLIC_IMAGES__/span-zfb.png" alt="">　　
+                </label>
+                <label for="ico3">
+                    <input class="form-control" id="ico3"  type="radio" name="ico" value="__PUBLIC_IMAGES__/span-yl.png" <?php echo $info['ico']=='/tpl/Public/images/span-yl.png' ?'checked':''?>>
+                    <img src="__PUBLIC_IMAGES__/span-yl.png" alt="">　　
+                </label>
+
+            </td>
+        </tr>
+        <tr>
+            <th>标识</th>
+            <td>
+                <input class="form-control" placeholder="标识" type="text" name="paytype" value="{$info.paytype}">
+            </td>
+        </tr>
+
+        <tr>
+            <th>名称</th>
+            <td>
+                <input class="form-control" placeholder="名称" type="text" name="pay_name" value="{$info.pay_name}">
+            </td>
+        </tr>
+
+        <tr>
+            <th>副名称</th>
+            <td>
+                <input class="form-control" placeholder="副名称" type="text" name="pay_name2" value="{$info.pay_name2}">
+            </td>
+        </tr>
+        <tr>
+            <th>充值金额设置</th>
+            <td>
+                最低充值
+                <input style="width:100px" class="form-control" type="text" name="min_money" value="{$info.min_money}">元　　
+
+                最高充值
+                <input style="width:100px" class="form-control" type="text" name="max_money" value="{$info.max_money}">元
+
+            </td>
+        </tr>
+
+        <div id="online_0" data-online="{$info['is_online']}">
+            <tr class="online_0">
+                <th>收款人账号</th>
+                <td>
+                    <input placeholder="收款人账号" class="form-control" type="text" name="shou_name" value="{$info.shou_name}">
+                </td>
+            </tr>
+            <tr class="online_0">
+                <th>收款人姓名</th>
+                <td>
+                    <input  placeholder="收款人姓名" class="form-control" type="text" name="shou_account" value="{$info.shou_account}">
+                </td>
+            </tr>
+
+            <tr class="online_0">
+                <th>是否二维码支付</th>
+                <td>
+                    <input class="form-control"  type="radio" name="is_erweima" value="1" <?php echo $info['is_erweima']?'checked':''?>>是　　
+                    <input class="form-control"  type="radio" name="is_erweima" value="0" <?php echo !$info['is_erweima']?'checked':''?>>否
+                </td>
+            </tr>
+            <tr class="online_0">
+                <th>二维码</th>
+                <td>
+                    <input name="erweima" id="thumb" type="text" class="input col-xs-12 col-sm-5" size="40" value="{$info.erweima}" />
+                    <input type="button" class="btn btn-info"  onclick="flashupload2('thumb', '上传文件', 'thumb', return_value, '{:CONTROLLER_NAME}_thumb');" value="浏览..">
+                </td>
+            </tr>
+        </div>
+
+        <div id="online_1" style="display:<?php echo $info['is_online'] ? 'block' : 'none' ?>">
+            <tr class="online_1" style="display: none">
+                <th>商户标识</th>
+                <td>
+                    <input placeholder="商户标识" class="form-control" type="text" name="store_name" value="{$info.store_name}">
+                </td>
+            </tr>
+            <tr class="online_1" style="display: none">
+                <th>商户秘钥</th>
+                <td>
+                    <input placeholder="商户秘钥" class="form-control" type="text" name="store_key" value="{$info.store_key}">
+                </td>
+            </tr>
+            <tr class="online_1" style="display: none">
+                <th>商户秘钥2</th>
+                <td>
+                    <input placeholder="商户秘钥2" class="form-control" type="text" name="store_key2" value="{$info.store_key2}">
+                </td>
+            </tr>
+            <tr class="online_1" style="display: none">
+                <th>前台跳转地址</th>
+                <td>
+                    <input placeholder="前台跳转地址" class="form-control" type="text" name="store_frontend_redirect_url" value="{$info.store_frontend_redirect_url}">
+                </td>
+            </tr>
+            <tr class="online_1" style="display: none">
+                <th>前台通知地址</th>
+                <td>
+                    <input placeholder="前台通知地址" class="form-control" type="text" name="store_frontend_notice_url" value="{$info.store_frontend_notice_url}">
+                </td>
+            </tr>
+            <tr class="online_1" style="display: none">
+                <th>异步回调地址</th>
+                <td>
+                    <input placeholder="异步回调地址" class="form-control" type="text" name="store_notify_url" value="{$info.store_notify_url}">
+                </td>
+            </tr>
+        </div>
+
+        <tr id="tr_content">
+            <th>支付说明</th>
+            <td>
+                <textarea id="page_content" class="col-xs-10 col-sm-10" style="height: 300px;" name="pay_desc">{$info.pay_desc}</textarea>
+            </td>
+        </tr>
+
+        <tr >
+            <th>排序</th>
+            <td>
+                <input id="sort" class="form-control"  name="order_number" value="{$info.order_number}">
+            </td>
+        </tr>
+        <tr>
+            <th>启用</th>
+            <td>
+                <input class="form-control"  type="radio" name="status" value="1" <?php echo $info['status']?'checked':''?>>是　　
+                <input class="form-control"  type="radio" name="status" value="0" <?php echo !$info['status']?'checked':''?>>否
+            </td>
+        </tr>
+
+        <tr>
+            <th></th>
+            <td>
+                <input class="btn btn-success" type="submit" value="提交">
+            </td>
+        </tr>
+    </table>
+</form>
+
+<bootstrapjs />
+<icheckjs color="blue" />
+
+<js href="__PUBLIC__/kindeditor/kindeditor.js,__PUBLIC__/kindeditor/lang/zh_CN.js"/>
+<script type="text/javascript">
+    $(function(){
+        //引入编辑器
+        var  content;
+        KindEditor.ready(function(K) {
+            content = K.create('#page_content');
+        });
+
+        $("#is_set_price").change(function(){
+            var val = $(this).val();
+            if( val == 1 ) {
+                $('.video1').show();
+            } else {
+                $('.video1').hide();
+            }
+        })
+
+        $("#is_serial").change(function(){
+            var val = $(this).val();
+            if( val == 0 ) {
+                $('#tr_content').show();
+                $('.tr_video').show();
+            } else {
+                $('#tr_content').hide();
+                $('.tr_video').hide();
+            }
+        })
+
+        //
+        $(function(){
+            $("#is_online_tr :radio").click(function(){
+                var  val = $(this).val();
+                if (val == 1) {
+                    $('.online_1').show();
+                    $('.online_0').hide();
+                }else{
+                    $('.online_0').show();
+                    $('.online_1').hide();
+                }
+            });
+        });
+
+        //
+        if ( $('#online_0').data('online') ){
+            $('.online_1').show();
+            $('.online_0').hide();
+        }else{
+            $('.online_0').show();
+            $('.online_1').hide();
+        }
+
+    });
+
+</script>
+</body>
+
+
+
+
+
+</html>

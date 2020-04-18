@@ -1,0 +1,99 @@
+{~$title = "提现账户"}
+<include file="Public:header"/>
+
+<bootstrapcss />
+<!--<icheckcss />-->
+<bootstrapjs />
+
+<!--<webuploadercss/>-->
+<!--<webuploaderjs/>-->
+
+
+<body>
+<!-- 头部部分 开始 -->
+<header class="top_header">
+    <div class="left"><a href="javascript:" data-url="{:U('info')}" class="return go-back"></a></div>
+    <div class="title">{$title}</div>
+</header>
+<div class="mt tline">
+    <section class="with-main">
+        <form class="submit-ajax" data-callback="1" id="form1" name="form1" method="post" action="{:U('info_edit')}">
+            <input type="hidden" name="f" value="{$Think.get.f}">
+            <div class="search">
+                <select name="bank_name" id="bank_name" >
+                    <option value=""> -请选择开户银行- </option>
+                    <volist name="banks" id="vo">
+                        <option value="{$vo}" <if condition="$member['bank_name'] eq $vo"> selected</if> >{$vo}</option>
+                    </volist>
+                </select>
+            </div>
+            <div class="search" id="subbranch_name_box" <if condition="$member['bank_name'] eq '支付宝'">style='display: none'</if> ></if>
+            <input type="text" name="subbranch_name" value="{$member.subbranch_name}" placeholder="支行名称">
+            </div>
+            <div class="search" id="bank_">
+                <input type="text" name="bank_user" value="{$member.bank_user}" placeholder="姓名">
+            </div>
+            <div class="search">
+                <input type="hidden" name="field" value="{$field}">
+                <input style="width: 100%; height: 40px; line-height: 40px;" type="text" name="value" id="card_num" value="{$value}" placeholder="银行卡卡号">
+            </div>
+
+
+
+            <div class="search zfb_ewm" style="width: 292px;height:179px;margin: 0 auto ;display:{$member['bank_name']=='支付宝' ? 'block' : 'none' }">
+                <input type="text" id="zfb_ewm" name="zfb_ewm" style="display: none;">
+                <img src="<?php echo $member['zfb_ewm'] ? $member['zfb_ewm'] : '/tpl/Public/js/fex/image.png'?>" width="100%" height="100%" onclick="addImgs('head_img')">
+                <p style="text-align: center;margin: 0;">点击上传图片,头像建议 292*179像素</p>
+            </div>
+
+            <div class="search weixin_ewm" style="width: 292px;height:179px;margin: 0 auto ;display:{$member['bank_name']=='微信' ? 'block' : 'none' };">
+                <input type="text" id="weixin_ewm" name="weixin_ewm" style="display: none;">
+                <img src="<?php echo $member['weixin_ewm'] ? $member['weixin_ewm'] : '/tpl/Public/js/fex/image.png' ?>" width="100%" height="100%" onclick="addImgs('head_img')">
+                <p style="text-align: center;margin: 0;">点击上传图片,头像建议 292*179像素</p>
+            </div>
+
+            <div class="btn" style="margin-top: 20px;width: 100%;border:0;background-color: rgb(246, 246, 246)!important;">
+                <button type="submit">确定</button>
+            </div>
+        </form>
+    </section>
+</div>
+
+</body>
+</html>
+
+<script>
+    $('#bank_name').change(function(){
+        if($(this).val() == '支付宝') {
+            $('#subbranch_name_box').hide();
+            $('.zfb_ewm').show();
+            $('#card_num').attr('placeholder', '支付宝帐号');
+        } else {
+            $('#subbranch_name_box').show();
+            $('.zfb_ewm').hide();
+            $('#card_num').attr('placeholder', '银行卡卡号');
+        }
+        if($(this).val() == '微信') {
+            $('#subbranch_name_box').hide();
+            $('.weixin_ewm').show();
+        } else {
+            if(!$(this).val() == '微信') {
+                $('#subbranch_name_box').show();
+            }
+            $('.weixin_ewm').hide();
+        }
+    })
+
+    function submit_callback(data){
+        if( data.status == 1 ) {
+            window.location.href = data.url;
+        } else {
+            sp_tip(data.info);
+        }
+    }
+    //多图添加
+    function addImgs(id){
+        flashupload(id, '上传文件', id, return_value, '{:CONTROLLER_NAME}_thumb',1);
+    }
+
+</script>

@@ -48,7 +48,7 @@
                 <p>首页</p>
             </a>
         </li>
-        <li <if condition="CONTROLLER_NAME eq 'Task' and ACTION_NAME neq 'submission_task_list'"> class="active"</if> >
+        <li <if condition="CONTROLLER_NAME eq 'Task' and ACTION_NAME eq ''"> class="active"</if> >
             <a href="{:U('Task/index')}">
                 <span><i class="icon_task" style="width: 25px;height: 25px;"></i></span>
               <p>VIP</p>
@@ -63,8 +63,8 @@
 
              <p>发布</p>
         </li>
-		<li <if condition="CONTROLLER_NAME eq 'Task' and ACTION_NAME eq 'submission_task_list'"> class="active"</if> >
-           <a href="{:U('Task/submission_task_list')}">
+		<li <if condition="CONTROLLER_NAME eq 'Task' and ACTION_NAME eq 'submission_task'"> class="active"</if> >
+           <a href="{:U('Task/submission_task')}">
                <span><i class="icon_xiaoxi" style="width: 25px;height: 25px;"></i></span>
                <p>任务 </p>
            </a>

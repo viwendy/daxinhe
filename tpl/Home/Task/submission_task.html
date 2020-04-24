@@ -92,7 +92,11 @@
                             </a>
                             <if condition="$vo['status'] eq 0">
 
-                                <span class="lq chakan" data-id="{$vo.id}">放弃任务</span>
+                                <span class="lq14" style="width: 30%; float:left;" onclick='window.location.href="{$vo.taskuser}"'>打开任务</span>
+
+                                <span class="lq chakan" data-id="{$vo.id}"  style="width:30%; float:right;">放弃</span>
+
+                                <span class="lq13" onclick='window.location.href="{:U('submission_task_do',array('id'=>$vo['id']))}"' style="width: 30%; float: right;margin-top: -13%;margin-right: 35%">提交任务</span>
 
                             </if>
 

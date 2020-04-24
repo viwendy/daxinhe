@@ -298,7 +298,7 @@ class TaskController extends HomeBaseController{
         $list = $model->alias('a')
             ->join(C('DB_PREFIX').'task as b on a.task_id = b.id','left')
             ->where($map)
-            ->field('a.*,b.title')
+            ->field('a.*,b.title,b.taskuser')
             ->order('a.id desc')->limit("$firstRow , $listRows")
             ->select();
 

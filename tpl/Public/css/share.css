@@ -426,11 +426,32 @@ padding-bottom: 50px;
 	color: #fc7d7d;
 }
 .index_qqq{
-	font-size: 20px;
+	/*font-size: 20px;*/
+	/*font-weight: bold;*/
+	/*color: #ff6d57;*/
+	/*height: 6rem;*/
+	/*line-height: 6rem;*/
+	font-size: 16px;
 	font-weight: bold;
 	color: #ff6d57;
-	height: 6rem;
-	line-height: 6rem;
+	/**height: 6rem;
+	line-height: 6rem;**/
+	height: 4.5rem;
+	line-height: 1.8rem;
+	padding-top: 1.5rem;
+}
+.index_qqq bottom{
+	padding: 0 5px;
+	border-radius: 6px;
+	background: linear-gradient(#FF9933, #FF6600);
+	color: #fff;
+	font-size: 13px;
+	float: left;
+	font-weight: 400;
+}
+.index_qqq .ylq{
+	background: linear-gradient(#dcd9d5, #888582);
+	padding: 0 10px;
 }
 .index_qqq span{
 	width: 40px;

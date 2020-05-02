@@ -965,6 +965,26 @@ class MemberController extends HomeBaseController{
         $this->display();
         
     }
+
+
+    public function getDanmu()
+    {
+        $vip_where['r.level'] = array('neq',0);
+        $vip_where['r.is_pay'] = 1;
+        $vip = M('recharge r')
+            ->join(C('DB_PREFIX').'member as m ON r.member_id = m.id')
+            ->where($vip_where)
+            ->field('m.id,m.nickname,m.username,r.level')
+            ->order('r.create_time desc')
+            ->limit(3)
+            ->select();
+        foreach($vip as $key=>$val){
+            $vip[$key]['level'] = $this->get_level_name($val['level']);
+            $vip[$key]['href'] = U('Member/vip');
+            $vip[$key]['info']= '恭喜<font color="#ff9917">'.$val['nickname'].'</font>成功抢购并开通<font color="#ff0000">'.$vip[$key]['level'].'</font>';
+        }
+        echo json_encode($vip);
+    }
     
     
     

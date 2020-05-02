@@ -1639,11 +1639,19 @@ footer .info a{
     float: left;
     margin-right: 12px;
 }
-.recharge_box label i.alipay {
+/*.recharge_box label i.alipay {*/
+    /*background: url("../images/logo-alipay.png") no-repeat;*/
+    /*background-size: 100% 100%;*/
+/*}*/
+/*.recharge_box label i.wxpay {*/
+    /*background: url("../images/logo-wechat.png") no-repeat;*/
+    /*background-size: 100% 100%;*/
+/*}*/
+.recharge_box label i.alipay,.recharge_box label i.alipay_wap{
     background: url("../images/logo-alipay.png") no-repeat;
     background-size: 100% 100%;
 }
-.recharge_box label i.wxpay {
+.recharge_box label i.wxpay ,.recharge_box label i.wechat,.recharge_box label i.paysapi,.recharge_box label i.yipay{
     background: url("../images/logo-wechat.png") no-repeat;
     background-size: 100% 100%;
 }

@@ -9,6 +9,7 @@ class IndexController extends HomeBaseController{
 
     public function index()
     {
+        $mid = $this->get_member_id();
         if (isset($_REQUEST['start']) && !empty($_REQUEST['start'])) {
             $start = $_REQUEST['start'];
             $map = array();
@@ -20,6 +21,13 @@ class IndexController extends HomeBaseController{
 
 
             foreach ($task_list as &$item) {
+                $item['class'] = '';
+                if($mid){
+                    $is_id = M('task_apply')->where(array('task_id'=>$item['id'],'member_id'=>$mid))->find();
+                    if($is_id){
+                        $item['class'] = 'ylq';
+                    }
+                }
                 //level
                 foreach ($level_list as $ite) {
                     if ($item['level'] == $ite['level']){
@@ -80,6 +88,13 @@ class IndexController extends HomeBaseController{
         $task_list = M('task')->field('id,cid,title,level,price,create_time,max_num,apply_num,max_num-apply_num as leftnum, tasklb')->where($map)->order('id desc')->limit(10)->select();
         $level_list = LevelModel::get_member_level();
         foreach ($task_list as &$item) {
+            $item['class'] = '';
+            if($mid){
+                $is_id = M('task_apply')->where(array('task_id'=>$item['id'],'member_id'=>$mid))->find();
+                if($is_id){
+                    $item['class'] = 'ylq';
+                }
+            }
             //level
             foreach ($level_list as $ite) {
                 if ($item['level'] == $ite['level']){
@@ -166,6 +181,7 @@ class IndexController extends HomeBaseController{
 
     public function serach()
     {
+        $mid = $this->get_member_id();
         $key = isset($_REQUEST['key']) ? $_REQUEST['key'] : '';
         $cid = isset($_REQUEST['cid']) ? $_REQUEST['cid'] : '';
         $sort = isset($_REQUEST['sort']) ? $_REQUEST['sort'] : '';
@@ -196,6 +212,13 @@ class IndexController extends HomeBaseController{
 
 
             foreach ($task_list as &$item) {
+                $item['class'] = '';
+                if($mid){
+                    $is_id = M('task_apply')->where(array('task_id'=>$item['id'],'member_id'=>$mid))->find();
+                    if($is_id){
+                        $item['class'] = 'ylq';
+                    }
+                }
                 //level
                 foreach ($level_list as $ite) {
                     if ($item['level'] == $ite['level']){
@@ -243,6 +266,13 @@ class IndexController extends HomeBaseController{
 
 
         foreach ($task_list as &$item) {
+            $item['class'] = '';
+            if($mid){
+                $is_id = M('task_apply')->where(array('task_id'=>$item['id'],'member_id'=>$mid))->find();
+                if($is_id){
+                    $item['class'] = 'ylq';
+                }
+            }
             //level
             foreach ($level_list as $ite) {
                 if ($item['level'] == $ite['level']){

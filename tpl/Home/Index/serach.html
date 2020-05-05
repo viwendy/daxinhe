@@ -1,16 +1,19 @@
 <include file="Public:header"/>
  <link rel="stylesheet" href="__PUBLIC_CSS__/share.css?3"/>
 <style>
-	.index_rwxq{width: 92%;
-		margin-left: 4%;}
+	.index_rwxq{width: 96%;
+		margin-left: 4%;
+		display: flex;
+		justify-content: center;
+	}
 	.index_title{min-height: 30px}
 	.index_tjrw{margin-top:10px;
 		height:100%;}
 	.index_rwxq img{
-		width: 4rem;margin:1rem 0.5rem;
-		height:4rem;;}
+		width: 3.2rem;margin:1rem 0.5rem;
+		height:3.2rem;}
 	.index_wzns{
-		width:55%;padding-top:5px}
+		width:63%;padding-top:5px}
 	.index_title{
 		display: -webkit-box;
 		-webkit-box-orient: vertical;
@@ -65,7 +68,7 @@
 
 <div class="body_main task_box mt tline" style="margin-top: 0px;border: none;overflow-x: hidden">
    <header class="top_header">
-    <div class="left"><a href="{:U('Index/index')}" class="return"></a></div>
+    <div class="left"><a href="{:U('Task/index')}" class="return"></a></div>
     <div class="title">任务大厅</div>
    </header>
 	<div style="height: 40px;"></div>
@@ -141,11 +144,11 @@
         		</div>
         		
         		<p class="index_qqq">
-        			{$vo.price}元
-        			<span></span>
+					<b>{$vo.price}元</b>
 					<bottom class="{$vo.class}"><if condition="$vo.class eq ''">领取任务<else/>已领取</if></bottom>
+        			<span></span>
         		</p>
-
+        		
         	</div>
         	</a>
         </volist>
@@ -228,16 +231,25 @@
             });
             $.post("/index.php/Home/Index/serach.html",{start: nStart,key:_this.data('key'),cid:_this.data('cid'),level:_this.data('level')},function(res){
                 $.each(res['info'], function(i,item){
-                    _this.append('<a href="/home/Task/show/id/'+item.id+'.html">\
-<div class="index_rwxq" style="width: 96%;margin-left: 2%;"><img src="'+item.ico+'"/>\
-<div class="index_wzns">\
-<p class="index_title">'+item.title+'</p>\
-<p class="index_ffl"> <span>'+item.name+' </span> <span class="index_gjrw">'+item.levelname+'</span> </p>\
-<p class="index_syrw">剩余数量：<span>'+item.apply_num+'</span>/'+item.max_num+'</p>\
-</div>\
-<p class="index_qqq">'+item.price+'元<span></span></p>\
-</div>\
-</a>');
+                    var tasks = '<a href="/home/Task/show/id/'+item.id+'.html">\
+						<div class="index_rwxq" style="width: 96%;margin-left: 2%;"><img src="'+item.ico+'"/>\
+						<div class="index_wzns">\
+						<p class="index_title">'+item.title+'</p>\
+						<p class="index_ffl"> <span>'+item.name+' </span> <span class="index_gjrw">'+item.levelname+'</span> </p>\
+						<p class="index_syrw">剩余数量：<span>'+item.apply_num+'</span>/'+item.max_num+'</p>\
+						</div>\
+						<p class="index_qqq">\
+						<b>'+item.price+'元</b><bottom class="'+item.class+'">';
+
+					if(item.class === ''){
+						tasks += '领取任务';
+					} else{
+						tasks += '已领取';
+					}
+
+					tasks += '</bottom><span></span></p></div></a>';
+
+					_this.append(tasks);
                 });
                 isbool = true;
                 layer.closeAll();

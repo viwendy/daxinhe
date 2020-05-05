@@ -399,6 +399,11 @@
                 });
                 $.post("/index.php/Home/Index/index.html",{start: nStart},function(res){
                     $.each(res['info'], function(i,item){
+                        if (item.class == ''){
+                            var ch = '领取任务';
+						} else {
+                            var ch = '已领取';
+						}
                         _this.append('<a href="/home/Task/show/id/'+item.id+'.html">\
 <div class="index_rwxq" ><img src="'+item.ico+'"/>\
 <div class="index_wzns">\
@@ -406,7 +411,7 @@
 <p class="index_ffl"> <span>'+item.name+' </span> <span class="index_gjrw">'+item.levelname+'</span> </p>\
 <p class="index_syrw">剩余数量：<span>'+item.apply_num+'</span>/'+item.max_num+'</p>\
 </div>\
-<p class="index_qqq">'+item.price+'元<span></span></p>\
+<p class="index_qqq">'+item.price+'元<span></span><bottom class="' + item.class + '">' + ch + '</bottom></p>\
 </div>\
 </a>');
                     });

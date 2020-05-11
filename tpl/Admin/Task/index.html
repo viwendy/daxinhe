@@ -63,6 +63,7 @@
         <th id="j_cbAll">全选</th>
         <th width="60">编号</th>
         <th>标题</th>
+        <th>悬赏单价</th>
         <th>任务类型</th>
         <th>任务级别</th>
         <th>已领/名额</th>
@@ -76,6 +77,7 @@
             <td><input type="checkbox" value="{$vo.id}" class="input checkbox_input" /></td>
             <td>{$vo.id}</td>
             <td>{$vo.title}</td>
+            <td>{$vo.price} 元</td>
             <td>{$vo.type_name}</td>
             <td><span class="level_{$vo.level}">{$vo.level_name}</span></td>
             <td>{$vo.apply_num}/{$vo.max_num}</td>

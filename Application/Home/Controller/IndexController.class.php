@@ -13,6 +13,12 @@ class IndexController extends HomeBaseController{
         if (isset($_REQUEST['start']) && !empty($_REQUEST['start'])) {
             $start = $_REQUEST['start'];
             $map = array();
+            $task_apply = M('task_apply')->field('task_id')->where(array('member_id'=>$mid))->select();
+            foreach($task_apply as &$ite) {
+                $map['id'][] .= array('neq',$ite['task_id']);
+            }
+            $taskids = array_column($task_apply, 'task_id');
+            $map['id'] = array('not in', $taskids);
             $map['status'] = 1;
             $task_list = M('task')->field('id,cid,title,level,price,create_time,max_num,apply_num,max_num-apply_num as leftnum, tasklb')->where($map)->order('id desc')->limit($start,10)->select();
             $level_list = LevelModel::get_member_level();
@@ -83,6 +89,12 @@ class IndexController extends HomeBaseController{
         $this->assign('cate_list', $cate_list);
 
         $map = array();
+        $task_apply = M('task_apply')->field('task_id')->where(array('member_id'=>$mid))->select();
+        foreach($task_apply as &$ite) {
+            $map['id'][] .= array('neq',$ite['task_id']);
+        }
+        $taskids = array_column($task_apply, 'task_id');
+        $map['id'] = array('not in', $taskids);
         $map['status'] = 1;
         $map['end_time'] = array('gt',time());
         $task_list = M('task')->field('id,cid,title,level,price,create_time,max_num,apply_num,max_num-apply_num as leftnum, tasklb')->where($map)->order('id desc')->limit(10)->select();
@@ -192,6 +204,18 @@ class IndexController extends HomeBaseController{
             $start = $_REQUEST['start'];
 
             $map['status'] = 1;
+            $task_apply = M('task_apply')->field('task_id')->where(array('member_id'=>$mid))->select();
+            foreach($task_apply as &$ite) {
+                $map['id'][] .= array('neq',$ite['task_id']);
+            }
+            $taskids = array_column($task_apply, 'task_id');
+            $map['id'] = array('not in', $taskids);
+            $task_apply = M('task_apply')->field('task_id')->where(array('member_id'=>$mid))->select();
+            foreach($task_apply as &$ite) {
+                $map['id'][] .= array('neq',$ite['task_id']);
+            }
+            $taskids = array_column($task_apply, 'task_id');
+            $map['id'] = array('not in', $taskids);
             $map['title']=array('like',"%$key%");
             $cid ? $map['cid'] = $cid : '';
             if($level==-1 ) {
@@ -246,6 +270,12 @@ class IndexController extends HomeBaseController{
 //        $task_list['type_0'] = M('task')->where(array('type'=>0,'status'=>1,'level'=>$level))->limit(5)->order('id desc')->select();
         //需求信息
         $map['status'] = 1;
+        $task_apply = M('task_apply')->field('task_id')->where(array('member_id'=>$mid))->select();
+        foreach($task_apply as &$ite) {
+            $map['id'][] .= array('neq',$ite['task_id']);
+        }
+        $taskids = array_column($task_apply, 'task_id');
+        $map['id'] = array('not in', $taskids);
         $cid ? $map['cid'] = $cid : '';
         if($level==-1 ) {
             unset($map['level']);

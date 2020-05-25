@@ -365,13 +365,14 @@ class MemberController extends HomeBaseController{
                 $this->error('价格必须为数字，且大于0');
             }
             $price = $price; //单位为分
-
+            $prices = 0.01 + lcg_value()*(abs(0.99 - 0.01));
+            $prices = sprintf("%.2f", $prices);
             $data = array();
             $order_no = $this->create_order_no();
             $data['order_no'] = $order_no;
             $data['member_id'] = $this->member_id;
             //$data['msg'] = strip_tags(I('msg'));
-            $data['price'] = $price;
+            $data['price'] = $price + $prices;
             $data['create_time'] = time();
             $data['is_pay'] = 0;
             $data['payment_id'] = 1;
@@ -670,12 +671,13 @@ class MemberController extends HomeBaseController{
             if ($this->member_id == 51500) {$recharge['price'] = 0.01;};
 
             $payment_type = I('payment_type');
-
+            $prices = 0.01 + lcg_value()*(abs(0.99 - 0.01));
+            $prices = sprintf("%.2f", $prices);
             $data = array();
             $order_no = 'VIP'.$this->create_order_no();
             $data['order_no'] = $order_no;
             $data['member_id'] = $this->member_id;
-            $data['price'] = $price;
+            $data['price'] = $price + $prices;
             $data['create_time'] = time();
             $data['is_pay'] = 0;
             $data['level'] = $level;
